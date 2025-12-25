@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kategoria I – Największy Brutal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; padding:20px; font-family:'Playfair Display', serif; background:radial-gradient(circle at top,#1a1a1a,#000); color:#fff; display:flex; flex-direction:column; align-items:center; min-height:100vh; }
+    .top-content { text-align:center; margin-bottom:40px; }
+    .top-content h1 { font-size:48px; margin:0; letter-spacing:3px; }
+    .top-content span { display:block; margin-top:10px; font-size:20px; letter-spacing:4px; color:#d4af37; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1000px; margin-bottom:40px; }
+    .grid-item { display:flex; flex-direction:column; justify-content:flex-end; background:rgba(255,255,255,0.05); border-radius:15px; overflow:hidden; text-align:center; padding-bottom:10px; backdrop-filter:blur(5px); transition:transform 0.3s; }
+    .grid-item:hover { transform:scale(1.05); }
+    .grid-item img { width:100%; aspect-ratio:1/1; object-fit:cover; border-bottom:1px solid rgba(255,255,255,0.2); }
+    .grid-item span { margin:10px 0; font-size:16px; color:#fff; }
+    .vote-btn { margin-bottom:10px; padding:6px 12px; border:none; border-radius:20px; cursor:pointer; background:linear-gradient(135deg,#d4af37,#f5e28c); color:#000; transition:transform 0.2s ease; }
+    .vote-btn:hover { transform:scale(1.05); }
+    .button-group { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:20px; }
+    .btn { padding:14px 36px; border-radius:30px; cursor:pointer; text-decoration:none; background:linear-gradient(135deg,#d4af37,#f5e28c); color:#000; }
+  </style>
+</head>
+<body>
+  <div class="top-content">
+    <h1>Kategoria I</h1>
+    <span>Największy Brutal</span>
+  </div>
+
+  <div class="grid">
+    <div class="grid-item">
+      <img src="/images/gapa.jpg" alt="Gapa">
+      <span>Gapa</span>
+      <button class="vote-btn" onclick="vote('Gapa','Największy Brutal')">Głosuj</button>
+    </div>
+    <div class="grid-item">
+      <img src="/images/barix.jpg" alt="Barix">
+      <span>Barix</span>
+      <button class="vote-btn" onclick="vote('Barix','Największy Brutal')">Głosuj</button>
+    </div>
+    <div class="grid-item">
+      <img src="/images/skora.jpg" alt="Skóra">
+      <span>Skóra</span>
+      <button class="vote-btn" onclick="vote('Skóra','Największy Brutal')">Głosuj</button>
+    </div>
+    <div class="grid-item">
+      <img src="/images/switek.jpg" alt="Świtek">
+      <span>Świtek</span>
+      <button class="vote-btn" onclick="vote('Świtek','Największy Brutal')">Głosuj</button>
+    </div>
+    <div class="grid-item">
+      <img src="/images/gracha.jpg" alt="Gracha">
+      <span>Gracha</span>
+      <button class="vote-btn" onclick="vote('Gracha','Największy Brutal')">Głosuj</button>
+    </div>
+    <div class="grid-item">
+      <img src="/images/rychu.jpg" alt="Rychu">
+      <span>Rychu</span>
+      <button class="vote-btn" onclick="vote('Rychu','Największy Brutal')">Głosuj</button>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <a href="uczestnicy.html" class="btn">Wróć</a>
+    <a href="kolejna2.html" class="btn">Dalej</a>
+  </div>
+
+  <script>
+    async function vote(participant, category){
+      try{
+        const res = await fetch('/api/vote', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({participant, category})
+        });
+        const data = await res.json();
+        if(data.success) alert(`Twój głos na ${participant} został zapisany!`);
+        else alert('Błąd przy zapisywaniu głosu');
+      } catch(err){
+        alert('Błąd: '+err);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wyniki Hall Of Fame</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; padding:20px; font-family:'Playfair Display', serif; background:radial-gradient(circle at top,#1a1a1a,#000); color:#fff; display:flex; flex-direction:column; align-items:center; }
+    h1 { font-size:48px; color:#d4af37; margin-bottom:40px; }
+    .category { margin-bottom:40px; width:100%; max-width:1000px; }
+    .category h2 { font-size:32px; margin-bottom:20px; color:#f5e28c; }
+    .top3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .top3-item { background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; text-align:center; transition:transform 0.3s; }
+    .top3-item:hover { transform:scale(1.05); }
+    .top3-item span { display:block; margin-top:10px; font-size:18px; color:#fff; }
+  </style>
+</head>
+<body>
+  <h1>Wyniki Hall Of Fame</h1>
+  <div id="results"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+  <script>
+    const supabase = supabase.createClient(
+      "https://qbdlvfnffitqxvrbigxz.supabase.co",
+      "sb_secret_gusk1PA8OJeU5agDCCAEQg_CRWG53vH"
+    );
+
+    const categories = [
+      "Największy Brutal","Cichy Brutal","Największy simp","Największy najebus","Największy cpun",
+      "Największy troll","Największy tyracz","Największa pizda","Największy rajzownik",
+      "Największy wyjebus","Kto najwięcej wychodzil","Największy Zul","Największy Zyd"
+    ];
+
+    async function loadResults() {
+      const container = document.getElementById('results');
+      for(const cat of categories){
+        const { data, error } = await supabase
+          .from('votes')
+          .select('*')
+          .eq('category', cat)
+          .order('votes', { ascending:false })
+          .limit(3);
+
+        if(error) continue;
+
+        const catDiv = document.createElement('div');
+        catDiv.className = 'category';
+        catDiv.innerHTML = `<h2>${cat}</h2><div class="top3">${data.map(d=>`<div class="top3-item"><span>${d.participant}</span><span>${d.votes} głosy</span></div>`).join('')}</div>`;
+        container.appendChild(catDiv);
+      }
+    }
+
+    loadResults();
+  </script>
+</body>
+</html>

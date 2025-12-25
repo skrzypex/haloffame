@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uczestnicy – Hall Of Fame</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+      margin: 0;
+      background: radial-gradient(circle at top, #1a1a1a, #000);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .top-content {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .top-content h1 {
+      font-size: 48px;
+      margin: 0;
+      letter-spacing: 3px;
+    }
+
+    .top-content span {
+      display: block;
+      margin-top: 10px;
+      font-size: 20px;
+      letter-spacing: 4px;
+      color: #d4af37;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 40px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* napis na dole */
+      transition: transform 0.3s;
+    }
+
+    .grid-item:hover {
+      transform: scale(1.05);
+    }
+
+    .grid-item img {
+      width: 100%;
+      aspect-ratio: 1 / 1; /* wymusza kwadrat */
+      object-fit: cover; /* obrazek wypełnia kwadrat */
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .grid-item span {
+      display: block;
+      margin: 10px 0;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 14px 36px;
+      font-size: 18px;
+      letter-spacing: 2px;
+      color: #000;
+      background: linear-gradient(135deg, #d4af37, #f5e28c);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+    }
+
+    /* RESPONSYWNOŚĆ */
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-content h1 {
+        font-size: 36px;
+      }
+      .top-content span {
+        font-size: 16px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-content">
+    <h1>Uczestnicy</h1>
+    <span>Hall Of Fame: Jezioro</span>
+  </div>
+
+  <div class="grid">
+    <div class="grid-item">
+      <img src="/images/gapa.jpg" alt="Uczestnik 1">
+      <span>Gapa</span>
+    </div>
+    <div class="grid-item">
+      <img src="/images/barix.jpg" alt="Uczestnik 2">
+      <span>Barix</span>
+    </div>
+    <div class="grid-item">
+      <img src="/images/skora.jpg" alt="Uczestnik 3">
+      <span>Skóra</span>
+    </div>
+    <div class="grid-item">
+      <img src="/images/switek.jpg" alt="Uczestnik 4">
+      <span>Świtek</span>
+    </div>
+    <div class="grid-item">
+      <img src="/images/gracha.jpg" alt="Uczestnik 5">
+      <span>Gracha</span>
+    </div>
+    <div class="grid-item">
+      <img src="/images/rychu.jpg" alt="Uczestnik 6">
+      <span>Rychu</span>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <a href="index.html" class="btn">Wróć</a>
+    <a href="kolejna.html" class="btn">Dalej</a>
+  </div>
+
+</body>
+</html>
